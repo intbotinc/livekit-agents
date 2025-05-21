@@ -1231,6 +1231,7 @@ class RealtimeSession(utils.EventEmitter[EventTypes]):
         @utils.log_exceptions(logger=logger)
         async def _recv_task():
             while True:
+                nonlocal ws_conn
                 msg = await ws_conn.receive()
                 if msg.type in (
                     aiohttp.WSMsgType.CLOSED,
